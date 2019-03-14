@@ -65,6 +65,14 @@ Description of weather conditions.
 
 URL to OpenWeatherMap weather conditions icon.
 
+=head1 METHODS
+
+=head2 from_source
+
+  $conditions = $conditions->from_source($hashref);
+
+Populate attributes from hashref of OpenWeatherMap API source data.
+
 =head1 BUGS
 
 Report any issues on the public bugtracker.

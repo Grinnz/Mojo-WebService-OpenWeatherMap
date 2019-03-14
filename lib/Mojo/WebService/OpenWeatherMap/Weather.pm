@@ -242,6 +242,14 @@ Snow volume in mm for the last L</"snow_window"> duration.
 Duration over which L</"snow"> volume was measured. Generally C<1h> for
 precipitation data from weather stations, and C<3h> for model data.
 
+=head1 METHODS
+
+=head2 from_source
+
+  $weather = $weather->from_source($hashref);
+
+Populate attributes from hashref of OpenWeatherMap API source data.
+
 =head1 BUGS
 
 Report any issues on the public bugtracker.

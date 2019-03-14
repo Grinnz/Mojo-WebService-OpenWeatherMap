@@ -83,7 +83,7 @@ Mojo::WebService::OpenWeatherMap::ForecastEntry - Forecast entry
 =head1 DESCRIPTION
 
 L<Mojo::WebService::OpenWeatherMap::ForecastEntry> is an object representing
-weather forecast data for a particular time from
+weather forecast data for a particular time or day from
 L<OpenWeatherMap|https://openweathermap.org>, used by
 L<Mojo::WebService::OpenWeatherMap>. See
 L<https://openweathermap.org/forecast5> and
@@ -214,6 +214,14 @@ Rain volume in mm for the 3 hour window (5 day/3 hour forecast only).
   my $snow = $entry->snow;
 
 Snow volume in mm for the 3 hour window (5 day/3 hour forecast only).
+
+=head1 METHODS
+
+=head2 from_source
+
+  $entry = $entry->from_source($hashref);
+
+Populate attributes from hashref of OpenWeatherMap API source data.
 
 =head1 BUGS
 

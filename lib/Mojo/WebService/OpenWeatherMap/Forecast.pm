@@ -97,6 +97,14 @@ ISO 3166 country code.
 Array reference of forecast time entries as
 L<Mojo::WebService::OpenWeatherMap::ForecastEntry> objects.
 
+=head1 METHODS
+
+=head2 from_source
+
+  $forecast = $forecast->from_source($hashref);
+
+Populate attributes from hashref of OpenWeatherMap API source data.
+
 =head1 BUGS
 
 Report any issues on the public bugtracker.
