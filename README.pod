@@ -1,0 +1,155 @@
+=pod
+
+=head1 NAME
+
+Mojo::WebService::OpenWeatherMap - Simple OpenWeatherMap API client
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+L<Mojo::WebService::OpenWeatherMap> is a L<Mojo::UserAgent> based
+L<OpenWeatherMap|https://openweathermap.org> API client that can perform
+requests synchronously or asynchronously. An OpenWeatherMap
+L<API key|https://openweathermap.org/guide> is required.
+
+Each method has a blocking variant which returns results directly, and a
+non-blocking C<_p> variant which returns a L<Mojo::Promise> that will resolve
+with the results asynchronously. On connection or HTTP error, blocking API
+queries will throw an exception, and non-blocking API queries will reject the
+promise.
+
+Note that this distribution implements only a subset of the OpenWeatherMap API
+and is considered experimental, as I will update it to suit my needs.
+Additional features may be added as requested.
+
+=head1 ATTRIBUTES
+
+=head2 api_key
+
+  my $api_key = $owm->api_key;
+  $owm        = $owm->api_key($api_key);
+
+OpenWeatherMap L<API key|https://openweathermap.org/guide>.
+
+=head2 ua
+
+  my $ua = $owm->ua;
+  $owm   = $owm->ua(Mojo::UserAgent->new);
+
+HTTP user agent object to use for requests, defaults to a L<Mojo::UserAgent>
+object.
+
+=head2 lang
+
+  my $lang = $owm->lang;
+  $owm     = $owm->lang('es');
+
+Language code to request for weather condition descriptions, defaults to C<en>.
+See L<https://openweathermap.org/current#multi> for supported languages.
+
+=head2 units
+
+  my $units = $owm->units;
+  $owm      = $owm->units('imperial');
+
+Type of units for returned data, can be C<metric>, C<imperial>, or undefined.
+Defaults to C<metric>. See L<https://openweathermap.org/weather-data> for units
+returned in each configuration.
+
+=head1 LOCATIONS
+
+Locations can be specified in the following ways:
+
+=over 4
+
+=item city
+
+Name of the city. C<country> can optionally be specified as an ISO-3166 country
+code.
+
+=item city_id
+
+OpenWeatherMap city ID. City IDs are listed in
+L<these archives|http://bulk.openweathermap.org/sample/>.
+
+=item latitude, longitude
+
+Geographical coordinates.
+
+=item zip
+
+Postal code. C<country> can optionally be specified as an ISO-3166 country
+code, and defaults to US.
+
+=back
+
+=head1 METHODS
+
+=head2 get_weather
+
+=head2 get_weather_p
+
+  my $weather = $owm->get_weather(city => $city);
+  my $weather = $owm->get_weather(city => $city, country => $country);
+  my $weather = $owm->get_weather(city_id => $city_id);
+  my $weather = $owm->get_weather(latitude => $latitude, longitude => $longitude);
+  my $weather = $owm->get_weather(zip => $zip);
+  my $weather = $owm->get_weather(zip => $zip, country => $country);
+  my $promise = $owm->get_weather_p(city => $city);
+
+Retrieve the current weather for a location as a
+L<Mojo::WebService::OpenWeatherMap::Weather> object.
+
+=head2 get_forecast
+
+=head2 get_forecast_p
+
+  my $forecast = $owm->get_forecast(city => $city);
+  my $forecast = $owm->get_forecast(city => $city, country => $country);
+  my $forecast = $owm->get_forecast(city_id => $city_id);
+  my $forecast = $owm->get_forecast(latitude => $latitude, longitude => $longitude);
+  my $forecast = $owm->get_forecast(zip => $zip);
+  my $forecast = $owm->get_forecast(zip => $zip, country => $country);
+  my $promise  = $owm->get_forecast_p(city => $city);
+
+Retrieve the five-day forecast (3 hour increments) for a location as a
+L<Mojo::WebService::OpenWeatherMap::Forecast> object.
+
+=head2 get_forecast_daily
+
+=head2 get_forecast_daily_p
+
+  my $forecast = $owm->get_forecast_daily(city => $city);
+  my $forecast = $owm->get_forecast_daily(city => $city, country => $country);
+  my $forecast = $owm->get_forecast_daily(city_id => $city_id);
+  my $forecast = $owm->get_forecast_daily(latitude => $latitude, longitude => $longitude);
+  my $forecast = $owm->get_forecast_daily(zip => $zip);
+  my $forecast = $owm->get_forecast_daily(zip => $zip, country => $country);
+  my $promise  = $owm->get_forecast_daily_p(city => $city);
+
+Retrieve the 16-day daily forecast for a location as a
+L<Mojo::WebService::OpenWeatherMap::Forecast> object. This API requires an
+L<OpenWeatherMap subscription|https://openweathermap.org/price>.
+
+=head1 BUGS
+
+Report any issues on the public bugtracker.
+
+=head1 AUTHOR
+
+Dan Book <dbook@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2019 by Dan Book.
+
+This is free software, licensed under:
+
+  The Artistic License 2.0 (GPL Compatible)
+
+=head1 SEE ALSO
+
+L<Weather::OpenWeatherMap>
+
+=cut
